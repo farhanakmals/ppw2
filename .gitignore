@@ -2,7 +2,6 @@
 /public/build
 /public/hot
 /public/images
-/public/thumb
 /public/storage
 /storage/*.key
 /vendor
