@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Buku;
+use App\Models\Komentar;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BukuController extends Controller
 {
@@ -55,6 +57,7 @@ class BukuController extends Controller
         $buku->penulis = $request->penulis;
         $buku->harga = $request->harga;
         $buku->tgl_terbit = $request->tgl_terbit;
+        $buku->suka = 0;
         $buku->save();
         return redirect('/')->with('message', 'Data berhasil ditambahkan');
     }
@@ -99,6 +102,13 @@ class BukuController extends Controller
     public function galeriBuku($bukuSeo) {
         $buku = Buku::where('buku_seo', $bukuSeo)->first();
         $dataGaleri = $buku->photos()->orderBy('id', 'desc')->paginate(6);
-        return view('buku.detail-buku', compact('buku', 'dataGaleri'));
+        $dataKomentar = $buku->comment()->paginate(10);
+        return view('buku.detail-buku', compact('buku', 'dataGaleri', 'dataKomentar'));
+    }
+
+    public function likeFoto(Request $request, $id) {
+        $buku = Buku::find($id);
+        $buku->increment('suka');
+        return back();
     }
 }

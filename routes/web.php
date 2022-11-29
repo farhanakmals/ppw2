@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\GaleriController;
+use App\Http\Controllers\KomentarController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -35,6 +36,8 @@ Route::get('/search', [BukuController::class, 'search'])->name('buku.search');
 
 Route::get('/detail-buku/{bukuSeo}', [BukuController::class, 'galeriBuku'])->name('buku.detail');
 
+Route::get('/like/{id}', [BukuController::class, 'likeFoto'])->name('buku.like');
+
 // User
 Route::get('/user', [UserController::class, 'index'])->name('user.index');
 
@@ -45,3 +48,6 @@ Route::post('/galeri', [GaleriController::class, 'store'])->name('galeri.store')
 Route::get('/galeri/update/{id}', [GaleriController::class, 'edit'])->name('galeri.edit');
 Route::post('/galeri/update/{id}', [GaleriController::class, 'update'])->name('galeri.update');
 Route::post('/galeri/delete/{id}', [GaleriController::class, 'destroy'])->name('galeri.destroy');
+
+// Komentar
+Route::post('/komentar/{bukuId}', [KomentarController::class, 'store'])->name('komentar.store');

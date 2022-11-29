@@ -38,6 +38,10 @@
         <td>{{ $buku->tgl_terbit->format('d/m/Y') }}</td>
         <td>
           <div class="d-flex gap-2">
+            <a href="{{ route('buku.like', $buku->id) }}" class="btn btn-outline-primary">
+              <i class="fa fa-thumbs-up"></i>
+              {{ $buku->suka }}
+            </a>
             <a href="{{ route('buku.detail', $buku->buku_seo )}}"><button class="btn btn-outline-primary">Detail</button></a>
             <a href="{{ route('buku.edit', $buku->id )}}"><button class="btn btn-outline-primary">Update</button></a>
             <form method="POST" action="{{ route('buku.destroy', $buku->id) }}">
