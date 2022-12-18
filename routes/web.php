@@ -49,5 +49,5 @@ Route::get('/galeri/update/{id}', [GaleriController::class, 'edit'])->name('gale
 Route::post('/galeri/update/{id}', [GaleriController::class, 'update'])->name('galeri.update');
 Route::post('/galeri/delete/{id}', [GaleriController::class, 'destroy'])->name('galeri.destroy');
 
-// Komentar
+
 Route::post('/komentar/{bukuId}', [KomentarController::class, 'store'])->name('komentar.store');

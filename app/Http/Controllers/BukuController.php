@@ -19,8 +19,8 @@ class BukuController extends Controller
     public function index()
     {
         $batas = 5;
-        $jumlahBuku = Buku::count();
         $dataBuku = Buku::orderBy('id')->paginate($batas);
+        $jumlahBuku = count($dataBuku);
         $no = $batas * ($dataBuku->currentPage()-1);
         return view('buku.index', compact('dataBuku', 'no', 'jumlahBuku'));
     }
@@ -102,7 +102,7 @@ class BukuController extends Controller
     public function galeriBuku($bukuSeo) {
         $buku = Buku::where('buku_seo', $bukuSeo)->first();
         $dataGaleri = $buku->photos()->orderBy('id', 'desc')->paginate(6);
-        $dataKomentar = $buku->comment()->paginate(10);
+        $dataKomentar = $buku->comments->load('user');
         return view('buku.detail-buku', compact('buku', 'dataGaleri', 'dataKomentar'));
     }
 

@@ -21,7 +21,7 @@ class GaleriController extends Controller
     {   
         $no = 0;
         $batas = 4;
-        $dataGaleri = Galeri::orderBy('id', 'desc')->paginate($batas);
+        $dataGaleri = Galeri::with('albums')->orderBy('id', 'desc')->paginate($batas);
         return view('galeri.index', compact('dataGaleri', 'no'));
     }
 

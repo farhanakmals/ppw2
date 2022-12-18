@@ -40,11 +40,11 @@ class KomentarController extends Controller
             'komentar' => 'required|string',
         ]);
 
-        Komentar::create([
-            'id_user' => Auth::id(),
-            'id_buku' => $bukuId,
-            'comment' => $request->komentar,
-        ]);
+        $komentar = new Komentar();
+        $komentar->id_user = Auth::id();
+        $komentar->id_buku = $bukuId;
+        $komentar->comment = $request->komentar;
+        $komentar->save();
 
         return Back();
     }
